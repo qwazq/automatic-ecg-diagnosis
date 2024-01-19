@@ -22,7 +22,41 @@ predictOutput_np=predictOutput_np.T
 gold_standard_np=gold_standard_np.T
 
 #
+rowN=0
+personN=0
 
-print(predictOutput_np)
+for row in predictOutput_np:
+    rowN+=1
+    for person_per in row:
+        # personN+=1
+        x_list.append(person_per)
+        y_list.append(rowN)
+
+rowN=0
+personN=0
+
+print(y_list)
+
+for row in gold_standard_np:
+    rowN+=1
+    for person_per in row:
+        personN+=1
+        print(personN)
+        if person_per==1:
+            c_list.append("r")
+            y_list[personN]+=0.3
+        else:
+            c_list.append("g")
+#
+
+# print(predictOutput_np)
 # print(gold_standard_np.shape)
 
+# print(c_list)
+
+y = np.array(x_list)
+x = np.array(y_list)
+colors = np.array(c_list)
+
+plt.scatter(x, y, c=colors,alpha=0.3,s=40)
+plt.show()
