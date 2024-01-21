@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 #
-from myFunctionFolder.my_CSV_Function import getCsvReader, CsvTo2DList, list2DWriteTo
+from myFunctionFolder.my_CSV_Function import *
 from myFunctionFolder.my_Numpy_Function import *
 
 #
@@ -13,9 +13,9 @@ gold_standard_np = csvToNp(gold_standard_path)
 
 #
 
-xyc_list_dtype = np.dtype([('sort', 'int'), ('id', 'int'), ('pre', 'float'), ('color', 'str')])
-xyc_list=np.zeros((predictOutput_np.shape[0]*6), dtype =xyc_list_dtype, order = 'C')
-
+# xyc_list_dtype = np.dtype([('sort', 'int'), ('id', 'int'), ('pre', 'float'), ('color', 'str')])
+# xyc_list=np.zeros((predictOutput_np.shape[0]*6), dtype =xyc_list_dtype, order = 'C')
+xyc_list=[]
 
 pass
 
@@ -37,19 +37,21 @@ for row in predictOutput_np:
             color = "r"
         else:
             color = "g"
-        print((N_row, N_col, count, color))
-        xyc_list[persionID]=(N_row, N_col, count, color)
+
+        xyc_list.append([N_row, N_col, count, color])
 
         N_col += 1
         persionID+=1
     pass
     N_col = 0
     N_row += 1
+
+    if persionID ==100:break
 pass
 
+xyc_list=np.array(xyc_list)
+
 xyc_list_output_path= "xyc_list.csv"
-list2DWriteTo(xyc_list, xyc_list_output_path)
+list2DToCsv(xyc_list, xyc_list_output_path, isOpen=0)
 #
-# plt.scatter(xyc_list[0, :, 0], xyc_list[0, :, 2])
-# plt.show()
-pass
+
