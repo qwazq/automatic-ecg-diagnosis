@@ -38,7 +38,11 @@ for row in predictOutput_np:
         else:
             color = "g"
 
-        xyc_list.append([N_row, N_col, count, color])
+        xyc_list.append([N_row+0.2*gold_standard_np[N_row][N_col],
+                         N_col,
+                         round(count,2),
+                         color]
+        )
 
         N_col += 1
         persionID+=1
@@ -51,7 +55,25 @@ pass
 
 xyc_list=np.array(xyc_list)
 
-xyc_list_output_path= "xyc_list.csv"
-list2DToCsv(xyc_list, xyc_list_output_path, isOpen=0)
+# xyc_list_output_path= "xyc_list.csv"
+# list2DToCsv(xyc_list, xyc_list_output_path)
 #
+# print(list(xyc_list[:,3]))
+#
+list_int_x=[]
+list_int_y=[]
 
+
+
+for row in xyc_list[:,0]:
+    list_int_x.append((float(row)))
+
+for row in xyc_list[:,2]:
+    list_int_y.append((float(row)))
+
+#
+plt.scatter(list_int_x, list_int_y, c=xyc_list[:,3],alpha=0.2)
+plt.ylim([0, 1])
+plt.show()
+
+pass
