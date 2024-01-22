@@ -30,7 +30,7 @@ if __name__ == '__main__':
     ##
     args.path_to_hdf5=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_data\test_data\ecg_tracings.hdf5"
     args.path_to_model=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_data\model\model.hdf5"
-    args.output_file="predictOutput.npy"
+    args.output_file= "my_graphPlot/predictOutput.npy"
     args.bs=32
     args.dataset_name="tracings"
     ##

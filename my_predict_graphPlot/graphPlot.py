@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 #
 from myFunctionFolder.my_CSV_Function import *
-from myFunctionFolder.my_Numpy_Function import *
+from myFunctionFolder.my_numpy_Function import *
 
 #
 predictOutput_path = "./predictOutput.csv"
@@ -53,12 +53,14 @@ for row in predictOutput_np:
     if persionID ==100:break
 pass
 
-xyc_list=np.array(xyc_list)
+#
 
-# xyc_list_output_path= "xyc_list.csv"
-# list2DToCsv(xyc_list, xyc_list_output_path)
+
+xyc_list_output_path= "../my_thresholdCalculation/xyc_list.csv"
+list2DToCsv(xyc_list, xyc_list_output_path)
 #
 # print(list(xyc_list[:,3]))
+xyc_list=np.array(xyc_list)
 #
 list_int_x=[]
 list_int_y=[]

@@ -1,8 +1,8 @@
 import h5py
 import numpy as np
 
-from myFunctionFolder.my_CSV_Function import getCsvWriter
-from myFunctionFolder.my_Numpy_Function import np2DWriterToCsv, write_3DnpTo2DCsv
+from myFunctionFolder.my_CSV_Function import getCsvWriter, np2DToCsv
+from myFunctionFolder.my_numpy_Function import np3DTo2DCsv
 #
 from myFunctionFolder.my_OS_Function import pathDownToByList, osOpenFile, joinPathAndName, joinToFileName
 
@@ -22,4 +22,4 @@ nparry = get_npAarray_from_hdf5(hdf5FilePath, groupName)
 
 
 
-write_3DnpTo2DCsv(nparry, outputFolder, isOpen=1)
+np3DTo2DCsv(nparry, outputFolder, isOpen=1)
