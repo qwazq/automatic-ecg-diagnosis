@@ -70,11 +70,9 @@ for N_pd, pd in enumerate(listPd_sixPredict):
     # 按行遍历
 
     for index, row in pd.iterrows():
-        # print(row.index)
 
         pd['TP'][index] =  pd["gold"][0:index+1].sum()
         pd['FP'][index] = index+1-pd['TP'][index]
-
         # pd['TN'][index] =pd["gold"][index+1:].sum()
         # pd["FN"][index] =len(pd["gold"][index+1:])-pd['TN'][index]
 
