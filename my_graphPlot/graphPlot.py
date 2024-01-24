@@ -15,6 +15,7 @@ np_predict=np_predict.T
 
 gold_standard_Path="gold_standard.csv"
 np_gold=csvToNp("gold_standard.csv")
+np_gold=np_gold.astype("bool_")
 np_gold=np_gold.T
 
 pass
