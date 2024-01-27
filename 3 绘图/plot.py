@@ -16,7 +16,7 @@ from myFunctionFolder.my_OS_Function import *
 
 #
 ##输入的预测文件，转为np.T
-path_output = r".\output"
+path_output = r"six类指标_12"
 
 pass
 # 六疾病的预测和金标准置入到列表中，列表中每个元素都是pd.df。之后对pd排序

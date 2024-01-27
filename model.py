@@ -9,9 +9,9 @@ class ResidualUnit(object):
     Parameters
     ----------
     n_samples_out: int
-        Number of output samples.
+        Number of six类指标_12 samples.
     n_filters_out: int
-        Number of output filters.
+        Number of six类指标_12 filters.
     kernel_initializer: str, optional
         Initializer for the weights matrices. See Keras initializers. By default it uses
         'he_normal'.

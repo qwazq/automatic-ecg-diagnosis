@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # parser.add_argument('--dataset_name', type=str, default='tracings',
     #                     help='name of the hdf5 dataset containing tracings')
     # parser.add_argument('--output_file', default="./dnn_output.npy",  # or predictions_date_order.csv
-    #                     help='output csv file.')
+    #                     help='six类指标_12 csv file.')
     # parser.add_argument('-bs', type=int, default=32,
     #                     help='Batch size.')
 
@@ -28,10 +28,10 @@ if __name__ == '__main__':
         warnings.warn("Unknown arguments:" + str(unk) + ".")
 
     ##
-    args.path_to_hdf5=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_data\test_data\ecg_tracings.hdf5"
+    args.path_to_hdf5=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_code\0 hdf5测试数据集修改\ecg_tracings_only6Line.hdf5"
     args.dataset_name="tracings"
     args.path_to_model=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_data\model\model.hdf5"
-    args.output_file= r".\predictOutput.npy"
+    args.output_file= r".\predictOutput_only6Line.npy"
     args.bs=32
     ##
 

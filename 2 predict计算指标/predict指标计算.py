@@ -15,18 +15,18 @@ from myFunctionFolder.my_OS_Function import *
 
 #
 ##输入的预测文件，转为np.T
-predictOutput_Path = "predictOutput.npy"
+predictOutput_Path = r"..\1 预测\predictOutput_only6Line.npy"
 np_predict = readFromNpyFile(predictOutput_Path)
 np_predict = np_predict.T
 
 ##输入的金标准文件，转为np.T
-gold_standard_Path = "gold_standard.csv"
-np_gold = csvToNp("gold_standard.csv")
+gold_standard_Path = "./gold_standard.csv"
+np_gold = csvToNp(gold_standard_Path)
 np_gold = np_gold.astype("bool_")
 np_gold = np_gold.T
 
 ##输出的六疾病整合csv
-outputFolder = ".\output"
+outputFolder = ".\six类指标_6"
 fileName_sixInfo = "sixInfo.csv"
 filePath_sixInfo = pathDownToByList(outputFolder, [fileName_sixInfo])
 csvW_sixInfo = getCsvWriter(filePath_sixInfo)
