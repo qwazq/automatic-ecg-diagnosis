@@ -3,9 +3,10 @@ import os
 import numpy as np
 import pandas as pd
 import sys
+import matplotlib.pyplot as plt
 #
 import warnings
-warnings.filterwarnings("ignore")
+# warnings.filterwarnings("ignore")
 #
 from myFunctionFolder.my_numpy_Function import *
 from myFunctionFolder.my_CSV_Function import *
@@ -38,26 +39,27 @@ listPd_sixPredict = []
 for count in range(len(np_gold)):
     pdDf = pd.DataFrame()
 
-    pdDf["personId"] = range(len(np_gold.T))
-    pdDf["probability"] = pd.Series(np_predict[count])
-    pdDf["gold"] = pd.Series(np_gold[count])
+    pdDf["personId"] = pd.Series(range(len(np_gold.T)), dtype="int")
+    pdDf["probability"] = pd.Series(np_predict[count], dtype="float")
+    pdDf["gold"] = pd.Series(np_gold[count], dtype="bool")
 
     # 按照probability从大到小，并重置索引
     pdDf = pdDf.sort_values(by="probability", ascending=False)
     pdDf = pdDf.reset_index(drop=True)
 
     #
-    pdDf["TP"] = pd.Series()
-    pdDf["FP"] = pd.Series()
-    pdDf["TN"] = pd.Series()
-    pdDf["FN"] = pd.Series()
+    pdDf["TP"] = pd.Series(dtype="int")
+    pdDf["FP"] = pd.Series(dtype="int")
+    pdDf["TN"] = pd.Series(dtype="int")
+    pdDf["FN"] = pd.Series(dtype="int")
+    pdDf["TN_recall"] = pd.Series(dtype="float")
+    pdDf["Precise"] = pd.Series(dtype="float")
+    pdDf["f1"] = pd.Series(dtype="float")
 
     #
     listPd_sixPredict.append(pdDf)
 
 pass
-
-
 
 # 六疾病遍历计算个参数
 for N_pd, pd in enumerate(listPd_sixPredict):
@@ -68,30 +70,48 @@ for N_pd, pd in enumerate(listPd_sixPredict):
     csvW_sixInfo.writerow([N_pd, n_all_T, n_all_F])
 
     # 按行遍历
-
     for index, row in pd.iterrows():
-
-        pd['TP'][index] =  pd["gold"][0:index+1].sum()
-        pd['FP'][index] = index+1-pd['TP'][index]
+        pd['TP'][index] =int(pd["gold"][0:index + 1].sum())
+        pd['FP'][index] = int(index + 1 - pd['TP'][index])
         # pd['TN'][index] =pd["gold"][index+1:].sum()
         # pd["FN"][index] =len(pd["gold"][index+1:])-pd['TN'][index]
 
     pass
-    pd['TN']=n_all_T-pd["TP"]
-    pd['FN']=n_all_F-pd["FP"]
-    break
+    pd['TN'] =n_all_T - pd["TP"]
+    pd['FN'] =n_all_F - pd["FP"]
+    #
+    pd["TN_recall"] = pd["FN"] / (n_all_F)
+    pd["Precise"] = pd["TP"]/(pd["TP"]+pd["FP"])
+    #(2×Precision×Recall)/（Precision+Recall）
+
+
 pass
 
 # 输出到csv
-for idx, Pd in enumerate(listPd_sixPredict):
-    filePath = pathDownToByList(outputFolder, ["pre_{}.csv".format(idx)])
-    pdWriteToCsv(Pd, filePath, isOpen=0)
+# for idx, Pd in enumerate(listPd_sixPredict):
+#     filePath = pathDownToByList(outputFolder, ["pre_{}.csv".format(idx)])
+#     pdWriteToCsv(Pd, filePath, isOpen=0)
 #
 # osOpen(outputFolder)
 # pass
 
-osOpen(
-    pathDownToByList(outputFolder, ["pre_0.csv"]),
-    software="excel")
+# osOpen(
+#     pathDownToByList(outputFolder, ["pre_0.csv"]),
+#     # software="excel"
+# )
+
+# # 六疾病遍历绘图
+# for N_pd, pd in enumerate(listPd_sixPredict):
+#     n_all = pd.shape[0]
+#     n_all_T = pd["gold"].sum()
+#     n_all_F = n_all - n_all_T
+#
+#     plt.plot(pd["probability"], pd["TN_recall"])
+#     plt.show()
+#
+# pass
+
+
 print("over")
 pass
+
