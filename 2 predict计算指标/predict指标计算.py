@@ -17,7 +17,7 @@ from myFunctionFolder.my_Console_Function import *
 
 #
 ##输入的预测文件，转为np.T
-predictOutput_Path = r"..\1 预测\predictOutput_only6Line.npy"
+predictOutput_Path = r"..\1 预测\predictOutput_3.npy"
 np_predict = readFromNpyFile(predictOutput_Path)
 np_predict = np_predict.T
 
@@ -28,7 +28,7 @@ np_gold = np_gold.astype("bool_")
 np_gold = np_gold.T
 
 ##输出的六疾病整合csv
-outputFolder = ".\六类指标_6"
+outputFolder = ".\六类指标_3"
 fileName_sixInfo = "sixInfo.csv"
 filePath_sixInfo = pathDownToByList(outputFolder, [fileName_sixInfo])
 csvW_sixInfo = getCsvWriter(filePath_sixInfo)
@@ -55,9 +55,9 @@ for count in range(len(np_gold)):
     pdDf["TN"] = pd.Series(dtype="int")
     pdDf["FN"] = pd.Series(dtype="int")
 
-    pdDf["准确率Accuracy"] = pd.Series(dtype="float")
-    pdDf["精度Precision"] = pd.Series(dtype="float")
-    pdDf["召回率recall"] = pd.Series(dtype="float")
+    pdDf["Accuracy"] = pd.Series(dtype="float")
+    pdDf["Precision"] = pd.Series(dtype="float")
+    pdDf["recall"] = pd.Series(dtype="float")
 
     pdDf["TN_recall"] = pd.Series(dtype="float")
     pdDf["f1"] = pd.Series(dtype="float")
@@ -88,9 +88,9 @@ for N_pd, pd in enumerate(listPd_sixPredict):
     pd['TN'] =n_all_T - pd["TP"]
     pd['FN'] =n_all_F - pd["FP"]
     #
-    pd["准确率Accuracy"] =(pd["TP"]+pd["TN"])/n_all
-    pd["精度Precision"] =pd["TP"]/(pd["TP"]+pd['FP'])
-    pd["召回率recall"] =pd["TP"]/(pd["TP"]+pd['FN'])
+    pd["Accuracy"] =(pd["TP"]+pd["TN"])/n_all
+    pd["Precision"] =pd["TP"]/(pd["TP"]+pd['FP'])
+    pd["recall"] =pd["TP"]/(pd["TP"]+pd['FN'])
     pd["TN_recall"] =pd["FN"] / (n_all_F)
     pd["f1"] =2*pd["TP"]/(2*pd["TP"]+pd['FN']+pd['FP'])
 
