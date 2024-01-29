@@ -16,7 +16,7 @@ from myFunctionFolder.my_OS_Function import *
 
 #
 ##输入的预测文件，转为np.T
-path_output = r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_code\2 predict计算指标\六类指标_3"
+path_output = r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_code\2 predict计算指标\六类指标_1"
 
 pass
 # 六疾病的预测和金标准置入到列表中，列表中每个元素都是pd.df。之后对pd排序
@@ -56,7 +56,7 @@ for N_pddf, pddf in enumerate(listPd_sixPredict):
         borderaxespad=0
                )
 
-    str_title = "瑞典827人的数据集,3导联,第{}种类型".format(N_pddf)
+    str_title = "瑞典827人的数据集,1导联,第{}种类型".format(N_pddf)
     plt.title(str_title)
 
     plt.savefig(pathJoin(path_output, str_title))

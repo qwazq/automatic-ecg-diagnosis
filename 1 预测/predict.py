@@ -28,10 +28,10 @@ if __name__ == '__main__':
         warnings.warn("Unknown arguments:" + str(unk) + ".")
 
     ##
-    args.path_to_hdf5=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_code\0 hdf5测试数据集修改\ecg_tracings_3.hdf5"
+    args.path_to_hdf5=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_code\0 hdf5测试数据集修改\ecg_tracings_1.hdf5"
     args.dataset_name="tracings"
     args.path_to_model=r"D:\codeBase\python\CrossCuttingIssues\automatic-ecg-diagnosis_data\model\model.hdf5"
-    args.output_file= r".\predictOutput_only6Line.npy"
+    args.output_file= r".\predictOutput_1.npy"
     args.bs=32
     ##
 
