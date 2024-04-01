@@ -14,10 +14,13 @@ from myFunctionFolder.my_CSV_Function import *
 from myFunctionFolder.my_pandas_Function import *
 from myFunctionFolder.my_OS_Function import *
 from myFunctionFolder.my_Console_Function import *
-
+#
+#hdf5模型中的导联数
+n_link=6
+is_stand="_stand"
 #
 ##输入的预测文件，转为np.T
-predictOutput_Path = r"..\1 预测\predictOutput_1.npy"
+predictOutput_Path = r"..\1 预测\predictOutput_{}{}.npy".format(n_link,is_stand)
 np_predict = readFromNpyFile(predictOutput_Path)
 np_predict = np_predict.T
 
@@ -28,7 +31,7 @@ np_gold = np_gold.astype("bool_")
 np_gold = np_gold.T
 
 ##输出的六疾病整合csv
-outputFolder = ".\六类指标_1"
+outputFolder = ".\六类指标_{}{}".format(n_link,is_stand)
 fileName_sixInfo = "sixInfo.csv"
 filePath_sixInfo = pathDownToByList(outputFolder, [fileName_sixInfo])
 csvW_sixInfo = getCsvWriter(filePath_sixInfo)
@@ -67,8 +70,6 @@ for count in range(len(np_gold)):
 
 pass
 
-
-
 # 六疾病遍历计算个参数
 for N_pd, pd in enumerate(listPd_sixPredict):
     n_all = pd.shape[0]
@@ -77,22 +78,22 @@ for N_pd, pd in enumerate(listPd_sixPredict):
 
     csvW_sixInfo.writerow([N_pd, n_all_T, n_all_F])
 
-    re=reporter_V3(allCount=len(pd),Input={"nowSort":N_pd})
+    re = reporter_V3(allCount=len(pd), Input={"nowSort": N_pd})
     # 按行遍历
     for index, row in pd.iterrows():
-        pd['TP'][index] =int(pd["gold"][0:index + 1].sum())
+        pd['TP'][index] = int(pd["gold"][0:index + 1].sum())
         pd['FP'][index] = int(index + 1 - pd['TP'][index])
 
         re.AddShow()
     pass
-    pd['TN'] =n_all_T - pd["TP"]
-    pd['FN'] =n_all_F - pd["FP"]
+    pd['TN'] = n_all_T - pd["TP"]
+    pd['FN'] = n_all_F - pd["FP"]
     #
-    pd["Accuracy"] =(pd["TP"]+pd["TN"])/n_all
-    pd["Precision"] =pd["TP"]/(pd["TP"]+pd['FP'])
-    pd["recall"] =pd["TP"]/(pd["TP"]+pd['FN'])
-    pd["TN_recall"] =pd["FN"] / (n_all_F)
-    pd["f1"] =2*pd["TP"]/(2*pd["TP"]+pd['FN']+pd['FP'])
+    pd["Accuracy"] = (pd["TP"] + pd["TN"]) / n_all
+    pd["Precision"] = pd["TP"] / (pd["TP"] + pd['FP'])
+    pd["recall"] = pd["TP"] / (pd["TP"] + pd['FN'])
+    pd["TN_recall"] = pd["FN"] / (n_all_F)
+    pd["f1"] = 2 * (pd["Precision"] * pd["recall"]) / (pd["Precision"] + pd["recall"])
 
 pass
 
@@ -112,4 +113,3 @@ pass
 
 print("over")
 pass
-

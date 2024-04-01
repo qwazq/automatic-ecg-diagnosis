@@ -13,3 +13,4 @@ pip install tqdm==4.26
 pip install xarray==0.11.2
 pip install seaborn==0.9
 pip install openpyxl==3.0
+pip install pydot
